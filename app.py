@@ -43,4 +43,4 @@ if choice == '2':
         file_append.write(line)
 
     filesize = Path("miasta_out.txt").stat().st_size
-    print(f"Generated {count} lines> File size: {filesize / 1000000} MB")
+    print(f"Generated {limit} lines File size: {filesize / 1000000} MB")
