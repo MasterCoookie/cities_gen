@@ -15,32 +15,33 @@ def gen_line(cities):
 
 print("Welcome to my generator!\nChoose 1 for limiting by filesize or 2 for limiting by lines count")
 choice = input()
-file = open("miasta.txt", mode='r', encoding="utf8")
+file = open("miasta_proc.txt", mode='r', encoding="utf8")
+out_file = "miasta_out.txt"
 cities = file.read().split('\n')
 if choice == '1':
     limit = int(input("Specify file size limit in MB "))
     limit *= 1000000
 
-    file_append = open("miasta_out.txt", mode='a',  encoding="utf8")
+    file_append = open(out_file, mode='a',  encoding="utf8")
     count = 0
-    filesize = Path("miasta_out.txt").stat().st_size
+    filesize = Path(out_file).stat().st_size
     while(filesize < limit):
         line = gen_line(cities)
         file_append.write(line)
         count += 1
         if not count % 10000:
             print(f"{count} lines written. Current file size: {filesize / 1000000} MB")
-        filesize = Path("miasta_out.txt").stat().st_size
+        filesize = Path(out_file).stat().st_size
     print(f"Generated {count} lines")
     
 
     
 if choice == '2':
     limit = int(input("Specify file size limit in lines "))
-    file_append = open("miasta_out.txt", mode='a')
+    file_append = open(out_file, mode='a')
     for _ in range(limit):
         line = gen_line(cities)
         file_append.write(line)
 
-    filesize = Path("miasta_out.txt").stat().st_size
+    filesize = Path(out_file).stat().st_size
     print(f"Generated {limit} lines File size: {filesize / 1000000} MB")
